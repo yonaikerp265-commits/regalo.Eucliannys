@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo para Eucliannys 💜</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================
+       VARIABLES Y PALETA DE COLORES (MORADO ROMÁNTICO)
+       ========================================== */
+    :root {
+      --primary-color: #9d65c9;       /* Morado lavanda cálido */
+      --primary-hover: #864bb3;       /* Morado interactivo */
+      --secondary-color: #c792ea;     /* Lila claro */
+      --accent-color: #8e54bf;        /* Acento para detalles */
+      --text-dark: #3c2a4d;           /* Texto legible púrpura oscuro */
+      --text-muted: #7e6c8f;          /* Texto tenue */
+      --bg-gradient-start: #f8f2fc;   /* Fondo degradado superior */
+      --bg-gradient-mid: #f3e8fa;     /* Fondo medio */
+      --bg-gradient-end: #eae0f5;     /* Fondo inferior */
+      --card-bg: #ffffff;             /* Fondo de tarjetas */
+      --shadow-color: rgba(157, 101, 201, 0.15); /* Sombras suavizadas */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .mobile-container {
+      width: 100%;
+      max-width: 430px;
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      min-height: 100vh;
+      padding: 20px 16px 40px 16px;
+      box-shadow: 0 0 30px var(--shadow-color);
+      position: relative;
+    }
+
+    /* ==========================================
+       PANTALLA DE BIENVENIDA (INTRO)
+       ========================================== */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 85vh;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .badge {
+      background-color: #f3e5f5;
+      color: var(--primary-color);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .intro-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .intro-message {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .heart-btn {
+      font-size: 65px;
+      cursor: pointer;
+      user-select: none;
+      animation: pulse 1.6s infinite;
+      margin: 20px 0;
+      filter: drop-shadow(0 4px 10px rgba(157, 101, 201, 0.3));
+      transition: transform 0.2s;
+    }
+
+    .heart-btn:active {
+      transform: scale(0.9);
+    }
+
+    .tap-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* ==========================================
+       CONTENIDO PRINCIPAL
+       ========================================== */
+    .hidden {
+      display: none !important;
+    }
+
+    #mainContent {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .card-section {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px var(--shadow-color);
+    }
+
+    /* PORTADA PRINCIPAL */
+    .hero-card {
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(60, 42, 77, 0.85), transparent);
+      color: white;
+      padding: 30px 20px 20px 20px;
+      text-align: center;
+    }
+
+    .hero-subtitle {
+      font-size: 11px;
+      letter-spacing: 3px;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 4px 0;
+    }
+
+    .hero-date {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* REPRODUCTOR DE MÚSICA DE FONDO MULTI-CANCIÓN */
+    .music-card {
+      text-align: center;
+    }
+
+    .music-card h3 {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .audio-player-custom {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8f2fc;
+      padding: 12px 18px;
+      border-radius: 25px;
+    }
+
+    .play-btn {
+      width: 42px;
+      height: 42px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      box-shadow: 0 4px 10px rgba(157, 101, 201, 0.3);
+      flex-shrink: 0;
+    }
+
+    .play-btn-small {
+      width: 34px;
+      height: 34px;
+      font-size: 12px;
+    }
+
+    .song-info {
+      text-align: left;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .song-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .song-artist {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .song-select-dropdown {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--secondary-color);
+      background: #ffffff;
+      color: var(--text-dark);
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+    }
+
+    /* CARRUSEL DE FOTOS */
+    .section-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .carousel-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      padding-bottom: 10px;
+      scrollbar-width: none;
+    }
+
+    .carousel-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-slide {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 280px;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* CARTA EMOTIVA */
+    .letter-card {
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      line-height: 1.6;
+      color: #332244;
+      background: #faf4fc;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .letter-signature {
+      margin-top: 15px;
+      text-align: right;
+      font-size: 22px;
+      color: var(--primary-color);
+    }
+
+    /* CONTADOR DE TIEMPO */
+    .counter-card {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      color: white;
+    }
+
+    .counter-number {
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 1;
+      margin: 10px 0 5px 0;
+    }
+
+    .counter-label {
+      font-size: 12px;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* LÍNEA DEL TIEMPO */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px dashed var(--secondary-color);
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '💜';
+      position: absolute;
+      left: -31px;
+      top: 0;
+      font-size: 14px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 2px 0;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* TRIVIA / QUIZ MODAL */
+    .quiz-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 15px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 15px var(--shadow-color);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(60, 42, 77, 0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 25px 20px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeInUp 0.4s ease-out;
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      background: #f8f2fc;
+      border: 1px solid #e2d2f0;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 12px;
+      color: var(--text-dark);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .option-btn:hover {
+      background: #ebd8f5;
+    }
+
+    .voucher-card {
+      background: #fdf8ff;
+      border: 2px dashed var(--primary-color);
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    /* ANIMACIONES */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-container">
+    
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="intro">
+      <span class="badge">TIENES UN REGALO</span>
+      <h1 class="intro-title">Para Eucliannys</h1>
+      <p class="intro-message">"Un lugar especial para alguien especial en mi corazon"</p>
+      <div class="heart-btn" onclick="abrirRegalo()" title="Toca para abrir">💜</div>
+      <p class="tap-hint">Toca el corazón para descubrir tu regalo</p>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="mainContent" class="hidden">
+
+      <!-- PORTADA PRINCIPAL -->
+      <div class="card-section hero-card">
+        <img src="fotos/portada/portada1.jpg" alt="Eucliannys" class="hero-img">
+        <div class="hero-overlay">
+          <p class="hero-subtitle">PARA</p>
+          <h2 class="hero-title">Eucliannys</h2>
+          <p class="hero-date">30 de septiembre de 2026</p>
+        </div>
+      </div>
+
+      <!-- REPRODUCTOR DE MÚSICA CON LISTA DE CANCIONES -->
+      <div class="card-section music-card">
+        <h3>Tus Canciones Especiales 🎵</h3>
+        
+        <div class="audio-player-custom" style="flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; width: 100%; gap: 10px;">
+            <button class="play-btn play-btn-small" onclick="cambiarCancion(-1)">⏮</button>
+            <button class="play-btn" id="playBgBtn" onclick="togglePlayMusic()">▶</button>
+            <button class="play-btn play-btn-small" onclick="cambiarCancion(1)">⏭</button>
+
+            <div class="song-info">
+              <div class="song-title" id="songTitle">Cargando canción...</div>
+              <div class="song-artist" id="songArtist">Tu Artista Favorito</div>
+            </div>
+          </div>
+
+          <!-- Selector de canción -->
+          <select id="songSelect" class="song-select-dropdown" onchange="seleccionarCancion(this.value)">
+            <!-- Opciones generadas por JavaScript -->
+          </select>
+        </div>
+
+        <audio id="bgMusic" loop></audio>
+      </div>
+
+      <!-- CARRUSEL DE FOTOS -->
+      <div class="card-section">
+        <h3 class="section-header">Momentos inolvidables 📸</h3>
+        <div class="carousel-container">
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto2.jpg" alt="Recuerdo 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto3.jpg" alt="Recuerdo 2">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto4.jpg" alt="Recuerdo 3">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto5.jpg" alt="Recuerdo 4">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto6.jpg" alt="Recuerdo 5">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto7.jpg" alt="Recuerdo 6">
+          </div>
+          <div class="carousel-slide">
+            <img src="fotos/foto2/foto7.jpg" alt="Recuerdo 7">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARTA EMOTIVA -->
+      <div class="card-section letter-card">
+        <h3>Hola, señorita Eucliannys 💜</h3>
+        <p>
+          si estas leyendo esto es porque llegaste al lugar de mi corazon donde almaceno mis mejores
+          momentos, y lo mas extraño es que en cada uno estas tu.
+          No se como agradecerte todo lo que has hecho por mi, eres mi persona favorita, mi danzarina favorita.
+          si me dieran a elegir una y mil veces te elijo a ti.
+          eres especial, unica, divertida, inteligente,seria, un poquito celosa y muchas cosas mas, pero sobretodo 
+          tienes un gran corazon que sobre todas las cosas ama primero a Dios y eso me encanta de ti, 
+          quiero hacer todo lo que pueda para que tu estes bien. porque te quiero  y quiero que siempre siempre seas feliz.
+        </p>
+        <p class="letter-signature">Con todo mi amor,<br><strong>for you</strong></p>
+      </div>
+
+      <!-- CONTADOR DE DÍAS -->
+      <div class="card-section counter-card">
+        <div class="counter-label">Nuestra historia lleva</div>
+        <div class="counter-number" id="diasContador">0</div>
+        <div class="counter-label">Días juntos 💜</div>
+      </div>
+
+      <!-- LÍNEA DEL TIEMPO -->
+      <div class="card-section">
+        <h3 class="section-header">Nuestra Línea del Tiempo ⏳</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">30 de septiembre 2026</div>
+            <div class="timeline-title">Nuestro nuevo incio</div>
+            <div class="timeline-desc">Mi segundo regalo para ti, flores del color que tu amas</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">20 de Mayo de 2023</div>
+            <div class="timeline-title">Nuestra primera cita</div>
+            <div class="timeline-desc">Ese paseo especial que esperamos con ansias</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTÓN PARA ABRIR TRIVIA -->
+      <div class="card-section" style="background: transparent; box-shadow: none; padding: 0;">
+        <button class="quiz-btn" onclick="abrirQuiz()">Una última sorpresa... ✨</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL DE QUIZ / TRIVIA -->
+  <div id="quizModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div id="quizQuestionArea">
+        <span class="badge">PREGUNTA <span id="questionNum">1</span> DE 3</span>
+        <h3 id="questionText" style="margin: 15px 0; font-size: 16px; color: var(--text-dark);">
+          ¿Dónde nos vimos por primera vez?
+        </h3>
+        <div id="optionsContainer">
+          <!-- Opciones dinámicas -->
+        </div>
+      </div>
+
+      <!-- VALE FINAL REVELADO -->
+      <div id="quizResultArea" class="hidden">
+        <span class="badge">¡LO HAS CONSEGUIDO! 🎉</span>
+        <div class="voucher-card">
+          <h3 style="font-size: 16px; color: var(--text-dark); margin-bottom: 8px;">
+            Vale por una comida especial en el lugar que  🥂✨
+          </h3>
+          <p style="font-size: 12px; color: var(--text-muted);">— Con todo mi amor</p>
+        </div>
+        <button class="quiz-btn" style="margin-top: 15px;" onclick="cerrarQuiz()">Volver al regalo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+        LÓGICA JAVASCRIPT
+       ========================================== -->
+  <script>
+    // LISTA DE CANCIONES
+    const listaCanciones = [
+      {
+        titulo: "Eres",
+        artista: "Karol Sevilla y Michael Ronda",
+        src: "./fotos/musica/musica1/cancion1.mp3"
+      },
+      {
+        titulo: "Si no estas",
+        artista: "iñigo quintero",
+        src: "./fotos/musica/musica2/cancion2.mp3"
+      },
+      {
+        titulo: "Siempre juntos",
+        artista: "Elenco Soy Lunas",
+        src: "./fotos/musica/musica2/musica3.mp3"
+      }
+    ];
+
+    let indiceCancionActual = 0;
+
+    // Inicializar opciones del menú desplegable
+    function inicializarListaMusica() {
+      const select = document.getElementById('songSelect');
+      select.innerHTML = '';
+      listaCanciones.forEach((cancion, index) => {
+        const opt = document.createElement('option');
+        opt.value = index;
+        opt.innerText = `${index + 1}. ${cancion.titulo} - ${cancion.artista}`;
+        select.appendChild(opt);
+      });
+      cargarCancion(0);
+    }
+
+    function cargarCancion(indice) {
+      const audio = document.getElementById('bgMusic');
+      const songTitle = document.getElementById('songTitle');
+      const songArtist = document.getElementById('songArtist');
+      const songSelect = document.getElementById('songSelect');
+
+      indiceCancionActual = indice;
+      audio.src = listaCanciones[indice].src;
+      songTitle.innerText = listaCanciones[indice].titulo;
+      songArtist.innerText = listaCanciones[indice].artista;
+      songSelect.value = indice;
+    }
+
+    function togglePlayMusic() {
+      const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('playBgBtn');
+
+      if (audio.paused) {
+        audio.play().then(() => {
+          btn.innerText = '⏸';
+        }).catch(e => console.log("Error al reproducir audio"));
+      } else {
+        audio.pause();
+        btn.innerText = '▶';
+      }
+    }
+
+    function seleccionarCancion(indice) {
+      const audio = document.getElementById('bgMusic');
+      const estabaSonando = !audio.paused;
+
+      cargarCancion(parseInt(indice));
+
+      if (estabaSonando) {
+        audio.play().then(() => {
+          document.getElementById('playBgBtn').innerText = '⏸';
+        });
+      }
+    }
+
+    function cambiarCancion(direccion) {
+      let nuevoIndice = indiceCancionActual + direccion;
+
+      if (nuevoIndice < 0) {
+        nuevoIndice = listaCanciones.length - 1;
+      } else if (nuevoIndice >= listaCanciones.length) {
+        nuevoIndice = 0;
+      }
+
+      seleccionarCancion(nuevoIndice);
+    }
+
+    // ABRIR REGALO
+    function abrirRegalo() {
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('mainContent').classList.remove('hidden');
+
+      const bgMusic = document.getElementById('bgMusic');
+      bgMusic.play().then(() => {
+        document.getElementById('playBgBtn').innerText = '⏸';
+      }).catch(e => console.log("Autoplay bloqueado por el navegador"));
+    }
+
+    // CONTADOR DE DÍAS JUNTOS
+    const fechaInicio = new Date(2023, 9, 1); // Año, Mes (Octubre = 9), Día
+    const hoy = new Date();
+    const diferenciaMs = Math.abs(hoy - fechaInicio);
+    const diasJuntos = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
+
+    document.getElementById('diasContador').innerText = diasJuntos;
+
+    // LÓGICA DE LA TRIVIA
+    const preguntas = [
+      {
+        pregunta: "¿Dónde nos vimos por primera vez?",
+        opciones: ["iglesia", "escuela", "calle"],
+        correcta: 0
+      },
+      {
+        pregunta: "¿Quién dijo te quiero primero?",
+        opciones: ["tu", "yo", "los dos a la vez"],
+        correcta: 1
+      },
+      {
+        pregunta: "¿Cuál es tu color favorito?",
+        opciones: ["azul", "morado", "rojo"],
+        correcta: 1
+      }
+    ];
+
+    let preguntaActual = 0;
+
+    function abrirQuiz() {
+      preguntaActual = 0;
+      document.getElementById('quizModal').classList.remove('hidden');
+      document.getElementById('quizQuestionArea').classList.remove('hidden');
+      document.getElementById('quizResultArea').classList.add('hidden');
+      cargarPregunta();
+    }
+
+    function cerrarQuiz() {
+      document.getElementById('quizModal').classList.add('hidden');
+    }
+
+    function cargarPregunta() {
+      const q = preguntas[preguntaActual];
+      document.getElementById('questionNum').innerText = preguntaActual + 1;
+      document.getElementById('questionText').innerText = q.pregunta;
+      
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
+
+      q.opciones.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => responder(index);
+        container.appendChild(btn);
+      });
+    }
+
+    function responder(indiceSeleccionado) {
+      if (preguntaActual < preguntas.length - 1) {
+        preguntaActual++;
+        cargarPregunta();
+      } else {
+        document.getElementById('quizQuestionArea').classList.add('hidden');
+        document.getElementById('quizResultArea').classList.remove('hidden');
+      }
+    }
+
+    // Inicializar lista de canciones al cargar la página
+    window.onload = function() {
+      inicializarListaMusica();
+    };
+  </script>
+
+</body>
+</html>
